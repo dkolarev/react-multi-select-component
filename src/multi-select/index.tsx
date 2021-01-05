@@ -50,6 +50,7 @@ const MultiSelect = ({
   ClearSelectedIcon,
   defaultIsOpen,
   isOpen,
+  ListRenderer,
 }: ISelectProps) => {
   const nvalue = value || [];
   return (
@@ -72,6 +73,7 @@ const MultiSelect = ({
           overrideStrings,
           ClearIcon,
           debounceDuration,
+          ListRenderer,
         }}
         disabled={disabled}
         labelledBy={labelledBy}

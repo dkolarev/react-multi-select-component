@@ -28,6 +28,7 @@ interface ISelectPanelProps {
   overrideStrings?: { [key: string]: string };
   ClearIcon?;
   debounceDuration?: number;
+  ListRenderer?: Function;
 }
 
 enum FocusType {
@@ -77,6 +78,7 @@ export const SelectPanel = (props: ISelectPanelProps) => {
     overrideStrings,
     ClearIcon,
     debounceDuration,
+    ListRenderer = SelectList,
   } = props;
   const [searchText, setSearchText] = useState("");
   const [searchTextForFilter, setSearchTextForFilter] = useState("");
@@ -213,7 +215,7 @@ export const SelectPanel = (props: ISelectPanelProps) => {
         />
       )}
 
-      <SelectList
+      <ListRenderer
         {...props}
         options={filteredOptions()}
         focusIndex={focusIndex}

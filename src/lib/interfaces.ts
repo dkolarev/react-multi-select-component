@@ -39,4 +39,5 @@ export interface ISelectProps {
   ClearSelectedIcon?: string | Function;
   defaultIsOpen?: boolean;
   isOpen?: boolean;
+  ListRenderer?: Function;
 }
