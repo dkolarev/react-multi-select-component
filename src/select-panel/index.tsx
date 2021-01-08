@@ -29,6 +29,7 @@ interface ISelectPanelProps {
   ClearIcon?;
   debounceDuration?: number;
   ListRenderer?: Function;
+  onSelectAll?: (checked: boolean) => void;
 }
 
 enum FocusType {
@@ -79,6 +80,7 @@ export const SelectPanel = (props: ISelectPanelProps) => {
     ClearIcon,
     debounceDuration,
     ListRenderer = SelectList,
+    onSelectAll,
   } = props;
   const [searchText, setSearchText] = useState("");
   const [searchTextForFilter, setSearchTextForFilter] = useState("");
@@ -111,8 +113,12 @@ export const SelectPanel = (props: ISelectPanelProps) => {
   };
 
   const selectAllChanged = (checked: boolean) => {
-    const newOptions = selectAllValues(checked);
-    onChange(newOptions);
+    if (onSelectAll) {
+      onSelectAll(checked);
+    } else {
+      const newOptions = selectAllValues(checked);
+      onChange(newOptions);
+    }
   };
 
   const handleSearchChange = (e) => {

@@ -40,4 +40,5 @@ export interface ISelectProps {
   defaultIsOpen?: boolean;
   isOpen?: boolean;
   ListRenderer?: Function;
+  onSelectAll?: (checked: boolean) => void;
 }
