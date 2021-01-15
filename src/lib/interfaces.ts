@@ -43,4 +43,5 @@ export interface ISelectProps {
   onSelectAll?: (checked: boolean) => void;
   onOpen?: () => void;
   onClose?: () => void;
+  HeaderRenderer?: Function;
 }
