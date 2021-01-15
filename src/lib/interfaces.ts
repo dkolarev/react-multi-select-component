@@ -44,4 +44,5 @@ export interface ISelectProps {
   onOpen?: () => void;
   onClose?: () => void;
   HeaderRenderer?: Function;
+  onSearchChange?: (term: string) => void;
 }

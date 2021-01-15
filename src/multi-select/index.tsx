@@ -55,6 +55,7 @@ const MultiSelect = ({
   onOpen,
   onClose,
   HeaderRenderer = DropdownHeader,
+  onSearchChange,
 }: ISelectProps) => {
   const nvalue = value || [];
   return (
@@ -79,6 +80,7 @@ const MultiSelect = ({
           debounceDuration,
           ListRenderer,
           onSelectAll,
+          onSearchChange,
         }}
         disabled={disabled}
         labelledBy={labelledBy}
