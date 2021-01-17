@@ -45,4 +45,5 @@ export interface ISelectProps {
   onClose?: () => void;
   HeaderRenderer?: Function;
   onSearchChange?: (term: string) => void;
+  onClearAll?: () => void;
 }

@@ -56,6 +56,7 @@ const MultiSelect = ({
   onClose,
   HeaderRenderer = DropdownHeader,
   onSearchChange,
+  onClearAll,
 }: ISelectProps) => {
   const nvalue = value || [];
   return (
@@ -91,6 +92,7 @@ const MultiSelect = ({
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
+        onClearAll={onClearAll}
       >
         <HeaderRenderer
           value={nvalue}

@@ -26,6 +26,7 @@ interface IDropdownProps {
   isOpen?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
+  onClearAll?: () => void;
 }
 
 const PanelContainer = css({
@@ -95,6 +96,7 @@ const Dropdown = ({
   isOpen,
   onOpen,
   onClose,
+  onClearAll,
 }: IDropdownProps) => {
   const [isInternalExpand, setIsInternalExpand] = useState(true);
   const [expanded, setExpanded] = useState(defaultIsOpen);
@@ -170,6 +172,9 @@ const Dropdown = ({
     e.stopPropagation();
     contentProps["onChange"]([]);
     isInternalExpand && handleExpandChange(false);
+    if (onClearAll) {
+      onClearAll();
+    }
   };
 
   return (
