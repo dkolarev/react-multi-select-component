@@ -50,6 +50,13 @@ const MultiSelect = ({
   ClearSelectedIcon,
   defaultIsOpen,
   isOpen,
+  ListRenderer,
+  onSelectAll,
+  onOpen,
+  onClose,
+  HeaderRenderer = DropdownHeader,
+  onSearchChange,
+  onClearAll,
 }: ISelectProps) => {
   const nvalue = value || [];
   return (
@@ -72,6 +79,9 @@ const MultiSelect = ({
           overrideStrings,
           ClearIcon,
           debounceDuration,
+          ListRenderer,
+          onSelectAll,
+          onSearchChange,
         }}
         disabled={disabled}
         labelledBy={labelledBy}
@@ -80,8 +90,11 @@ const MultiSelect = ({
         ClearSelectedIcon={ClearSelectedIcon}
         defaultIsOpen={defaultIsOpen}
         isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        onClearAll={onClearAll}
       >
-        <DropdownHeader
+        <HeaderRenderer
           value={nvalue}
           options={options}
           valueRenderer={valueRenderer}

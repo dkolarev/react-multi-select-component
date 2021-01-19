@@ -24,6 +24,9 @@ interface IDropdownProps {
   ClearSelectedIcon?;
   defaultIsOpen?: boolean;
   isOpen?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
+  onClearAll?: () => void;
 }
 
 const PanelContainer = css({
@@ -91,6 +94,9 @@ const Dropdown = ({
   ClearSelectedIcon,
   defaultIsOpen,
   isOpen,
+  onOpen,
+  onClose,
+  onClearAll,
 }: IDropdownProps) => {
   const [isInternalExpand, setIsInternalExpand] = useState(true);
   const [expanded, setExpanded] = useState(defaultIsOpen);
@@ -98,6 +104,15 @@ const Dropdown = ({
   const FinalArrow = ArrowRenderer || Arrow;
 
   const wrapper: any = useRef();
+
+  const handleExpandChange = (isOpen) => {
+    setExpanded(isOpen);
+    if (isOpen && onOpen) {
+      onOpen();
+    } else if (!isOpen && onClose) {
+      onClose();
+    }
+  };
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
@@ -107,7 +122,7 @@ const Dropdown = ({
   useEffect(() => {
     if (defaultIsOpen === undefined && typeof isOpen === "boolean") {
       setIsInternalExpand(false);
-      setExpanded(isOpen);
+      handleExpandChange(isOpen);
     }
   }, [isOpen]);
 
@@ -116,13 +131,13 @@ const Dropdown = ({
       switch (e.which) {
         case 27: // Escape
         case 38: // Up Arrow
-          setExpanded(false);
+          handleExpandChange(false);
           wrapper?.current?.focus();
           break;
         case 32: // Space
         case 13: // Enter Key
         case 40: // Down Arrow
-          setExpanded(true);
+          handleExpandChange(true);
           break;
         default:
           return;
@@ -132,7 +147,7 @@ const Dropdown = ({
   };
 
   const handleHover = (iexpanded: boolean) => {
-    isInternalExpand && shouldToggleOnHover && setExpanded(iexpanded);
+    isInternalExpand && shouldToggleOnHover && handleExpandChange(iexpanded);
   };
 
   const handleFocus = () => !hasFocus && setHasFocus(true);
@@ -140,7 +155,7 @@ const Dropdown = ({
   const handleBlur = (e) => {
     if (!e.currentTarget.contains(e.relatedTarget) && isInternalExpand) {
       setHasFocus(false);
-      setExpanded(false);
+      handleExpandChange(false);
     }
   };
 
@@ -149,13 +164,17 @@ const Dropdown = ({
   const handleMouseLeave = () => handleHover(false);
 
   const toggleExpanded = () => {
-    isInternalExpand && setExpanded(isLoading || disabled ? false : !expanded);
+    isInternalExpand &&
+      handleExpandChange(isLoading || disabled ? false : !expanded);
   };
 
   const handleClearSelected = (e) => {
     e.stopPropagation();
     contentProps["onChange"]([]);
-    isInternalExpand && setExpanded(false);
+    isInternalExpand && handleExpandChange(false);
+    if (onClearAll) {
+      onClearAll();
+    }
   };
 
   return (
