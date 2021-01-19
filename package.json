@@ -1,6 +1,6 @@
 {
   "name": "react-multi-select-component",
-  "version": "3.0.8",
+  "version": "3.1.0",
   "description": "Simple and lightweight multiple selection dropdown component with checkboxes, search and select-all",
   "author": "Harsh Zalavadiya",
   "license": "MIT",
@@ -62,7 +62,7 @@
     "semi": true,
     "singleQuote": false,
     "trailingComma": "es5",
-    "endOfLine":"auto"
+    "endOfLine": "auto"
   },
   "filesize": {
     "track": [
