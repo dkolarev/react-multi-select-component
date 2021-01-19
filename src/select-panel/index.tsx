@@ -28,6 +28,9 @@ interface ISelectPanelProps {
   overrideStrings?: { [key: string]: string };
   ClearIcon?;
   debounceDuration?: number;
+  ListRenderer?: Function;
+  onSelectAll?: (checked: boolean) => void;
+  onSearchChange?: (term: string) => void;
 }
 
 enum FocusType {
@@ -77,6 +80,9 @@ export const SelectPanel = (props: ISelectPanelProps) => {
     overrideStrings,
     ClearIcon,
     debounceDuration,
+    ListRenderer = SelectList,
+    onSelectAll,
+    onSearchChange,
   } = props;
   const [searchText, setSearchText] = useState("");
   const [searchTextForFilter, setSearchTextForFilter] = useState("");
@@ -109,14 +115,21 @@ export const SelectPanel = (props: ISelectPanelProps) => {
   };
 
   const selectAllChanged = (checked: boolean) => {
-    const newOptions = selectAllValues(checked);
-    onChange(newOptions);
+    if (onSelectAll) {
+      onSelectAll(checked);
+    } else {
+      const newOptions = selectAllValues(checked);
+      onChange(newOptions);
+    }
   };
 
   const handleSearchChange = (e) => {
     debouncedSearch(e.target.value);
     setSearchText(e.target.value);
     setFocusIndex(FocusType.SEARCH);
+    if (onSearchChange) {
+      onSearchChange(e.target.value);
+    }
   };
 
   const handleClear = () => {
@@ -213,7 +226,7 @@ export const SelectPanel = (props: ISelectPanelProps) => {
         />
       )}
 
-      <SelectList
+      <ListRenderer
         {...props}
         options={filteredOptions()}
         focusIndex={focusIndex}

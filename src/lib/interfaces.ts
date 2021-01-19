@@ -39,4 +39,11 @@ export interface ISelectProps {
   ClearSelectedIcon?: string | Function;
   defaultIsOpen?: boolean;
   isOpen?: boolean;
+  ListRenderer?: Function;
+  onSelectAll?: (checked: boolean) => void;
+  onOpen?: () => void;
+  onClose?: () => void;
+  HeaderRenderer?: Function;
+  onSearchChange?: (term: string) => void;
+  onClearAll?: () => void;
 }
