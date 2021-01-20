@@ -46,4 +46,5 @@ export interface ISelectProps {
   HeaderRenderer?: Function;
   onSearchChange?: (term: string) => void;
   onClearAll?: () => void;
+  disabledClass?: string;
 }

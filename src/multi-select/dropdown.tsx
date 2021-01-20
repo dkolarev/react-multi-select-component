@@ -27,6 +27,7 @@ interface IDropdownProps {
   onOpen?: () => void;
   onClose?: () => void;
   onClearAll?: () => void;
+  disabledClass?: string;
 }
 
 const PanelContainer = css({
@@ -97,6 +98,7 @@ const Dropdown = ({
   onOpen,
   onClose,
   onClearAll,
+  disabledClass,
 }: IDropdownProps) => {
   const [isInternalExpand, setIsInternalExpand] = useState(true);
   const [expanded, setExpanded] = useState(defaultIsOpen);
@@ -180,7 +182,9 @@ const Dropdown = ({
   return (
     <div
       tabIndex={0}
-      className={`${DropdownContainer} dropdown-container`}
+      className={`${DropdownContainer} dropdown-container ${
+        disabled && disabledClass ? disabledClass : null
+      }`}
       aria-labelledby={labelledBy}
       aria-expanded={expanded}
       aria-readonly={true}
