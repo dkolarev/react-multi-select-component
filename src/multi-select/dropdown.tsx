@@ -28,6 +28,7 @@ interface IDropdownProps {
   onClose?: () => void;
   onClearAll?: () => void;
   disabledClass?: string;
+  applyDisableToItems?: boolean;
 }
 
 const PanelContainer = css({
@@ -99,6 +100,7 @@ const Dropdown = ({
   onClose,
   onClearAll,
   disabledClass,
+  applyDisableToItems = false,
 }: IDropdownProps) => {
   const [isInternalExpand, setIsInternalExpand] = useState(true);
   const [expanded, setExpanded] = useState(defaultIsOpen);
@@ -167,7 +169,9 @@ const Dropdown = ({
 
   const toggleExpanded = () => {
     isInternalExpand &&
-      handleExpandChange(isLoading || disabled ? false : !expanded);
+      handleExpandChange(
+        isLoading || (disabled && !applyDisableToItems) ? false : !expanded
+      );
   };
 
   const handleClearSelected = (e) => {
@@ -183,7 +187,7 @@ const Dropdown = ({
     <div
       tabIndex={0}
       className={`${DropdownContainer} dropdown-container ${
-        disabled && disabledClass ? disabledClass : null
+        disabled && disabledClass && !applyDisableToItems ? disabledClass : null
       }`}
       aria-labelledby={labelledBy}
       aria-expanded={expanded}

@@ -47,4 +47,5 @@ export interface ISelectProps {
   onSearchChange?: (term: string) => void;
   onClearAll?: () => void;
   disabledClass?: string;
+  applyDisableToItems?: boolean;
 }
