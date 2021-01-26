@@ -58,6 +58,7 @@ const MultiSelect = ({
   onSearchChange,
   onClearAll,
   disabledClass,
+  applyDisableToItems,
 }: ISelectProps) => {
   const nvalue = value || [];
   return (
@@ -95,6 +96,7 @@ const MultiSelect = ({
         onClose={onClose}
         onClearAll={onClearAll}
         disabledClass={disabledClass}
+        applyDisableToItems={applyDisableToItems}
       >
         <HeaderRenderer
           value={nvalue}
