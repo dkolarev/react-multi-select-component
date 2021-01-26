@@ -206,7 +206,7 @@ const Dropdown = ({
       >
         <div className="dropdown-heading-value">{children}</div>
         {isLoading && <Loading />}
-        {contentProps["value"].length > 0 && (
+        {contentProps["value"].length > 0 && !disabled && (
           <button
             type="button"
             className={`${ClearSelectedButton} clear-selected-button`}
