@@ -200,6 +200,7 @@ export const SelectPanel = (props: ISelectPanelProps) => {
             onChange={handleSearchChange}
             onFocus={handleSearchFocus}
             value={searchText}
+            disabled={disabled}
           />
           <button
             type="button"
