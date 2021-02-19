@@ -48,4 +48,5 @@ export interface ISelectProps {
   onClearAll?: () => void;
   disabledClass?: string;
   applyDisableToItems?: boolean;
+  SelectAllRenderer?: Function;
 }

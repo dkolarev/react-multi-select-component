@@ -31,6 +31,7 @@ interface ISelectPanelProps {
   ListRenderer?: Function;
   onSelectAll?: (checked: boolean) => void;
   onSearchChange?: (term: string) => void;
+  SelectAllRenderer?: Function;
 }
 
 enum FocusType {
@@ -83,6 +84,7 @@ export const SelectPanel = (props: ISelectPanelProps) => {
     ListRenderer = SelectList,
     onSelectAll,
     onSearchChange,
+    SelectAllRenderer = SelectItem,
   } = props;
   const [searchText, setSearchText] = useState("");
   const [searchTextForFilter, setSearchTextForFilter] = useState("");
@@ -215,7 +217,7 @@ export const SelectPanel = (props: ISelectPanelProps) => {
       )}
 
       {hasSelectAll && hasSelectableOptions && (
-        <SelectItem
+        <SelectAllRenderer
           focused={focusIndex === 1}
           tabIndex={1}
           checked={isAllOptionSelected}
