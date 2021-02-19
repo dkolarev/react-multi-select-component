@@ -59,6 +59,7 @@ const MultiSelect = ({
   onClearAll,
   disabledClass,
   applyDisableToItems,
+  SelectAllRenderer,
 }: ISelectProps) => {
   const nvalue = value || [];
   return (
@@ -84,6 +85,7 @@ const MultiSelect = ({
           ListRenderer,
           onSelectAll,
           onSearchChange,
+          SelectAllRenderer,
         }}
         disabled={disabled}
         labelledBy={labelledBy}
